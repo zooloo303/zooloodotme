@@ -19,6 +19,9 @@ migrations
 # Ignore the .env file which might contain sensitive information
 .env
 
+# Ignore the adin static files in staticfiles directory
+staticfiles/admin
+
 # Ignore all .pyc, .pyo and .pyd files.
 *.pyc
 *.pyo
