@@ -1,11 +1,11 @@
 # .gitignore
 
 # Ignore the Python compiled files
-__pycache__/
+__pycache__
 *.py[cod]
 
 # Ignore Django migration files
-*/migrations/*
+migrations
 
 # Ignore all log files
 *.log
