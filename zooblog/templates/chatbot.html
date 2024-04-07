@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'chat_bot/css/styles.css' %}">
+
+
+<div class="container" style="margin-left: 200px;">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card mt-3">
+                <div class="card-header">
+                    Chatbot
+                </div>
+                <div class="card-body">
+                    <div class="chat-box" id="chat-box">
+                        <div class="chat-box__message chat-box__message--bot">
+                            <p>Hello! I am a chatbot. How can I help you?</p>
+                        </div>
+                    </div>
+                    <form id="chat-form">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="chat-input" placeholder="Type your message here">
+                            <button class="btn btn-primary" type="submit">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script> 
+    function getUserInput() {
+      const inputElement = document.getElementById('chat-input');
+      const userInput = inputElement.value;
+      const chatBox = document.getElementById('chat-box');
+      const userMessage = document.createElement('div');
+      userMessage.classList.add('chat-box__message');
+      userMessage.classList.add('chat-box__message--user');
+      userMessage.classList.add('user-input-style'); 
+      userMessage.innerHTML = `<p>Me: ${userInput}</p>`;
+      chatBox.appendChild(userMessage);
+
+      fetch('getResponse?userMessage=' + encodeURIComponent(userInput))
+        .then(response => response.text())
+        .then(data => {
+          const botMessage = document.createElement('div');
+          botMessage.classList.add('chat-box__message');
+          botMessage.classList.add('chat-box__message--bot');
+          botMessage.classList.add('bot-input-style');
+          botMessage.innerHTML = `<p>Bot: ${data}</p>`;
+          chatBox.appendChild(botMessage);
+        });
+
+      inputElement.value = '';
+      return userInput;
+    }
+  
+    document.getElementById('chat-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      getUserInput();
+    });
+</script>
+{% endblock %}

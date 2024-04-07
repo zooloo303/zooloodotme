@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/styles.css' %}">
+<div class="col-md-9 ml-sm-auto col-lg-10 px-md-4" style="margin-left: 200px;">
+    <h1 class="h1">Blog</h1>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Blog Post Title</h5>
+                    <p class="card-text">I'm going to figure out how to add more to this page soon, 
+                                        like, maybe cards aren't the best idea here, maybe another container
+                                        would look better for a blog post. Also there must be a better way
+                                        to input new posts rather than editing the html right?!</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <!-- You can duplicate the above col-sm-4 div to create more cards -->
+    </div>
+</div>
+{% endblock %}
