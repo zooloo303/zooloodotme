@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'zooblog/css/styles.css' %}">
-
-
-<div class="container" style="margin-left: 200px;">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
+<div class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div class="header-bar">
+        <h1 class="h1 prominent-header">Chatty</h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-10">
             <div class="card mt-3">
                 <div class="card-header">
                     Chatbot
@@ -30,36 +30,7 @@
         </div>
     </div>
 </div>
-<script> 
-    function getUserInput() {
-      const inputElement = document.getElementById('chat-input');
-      const userInput = inputElement.value;
-      const chatBox = document.getElementById('chat-box');
-      const userMessage = document.createElement('div');
-      userMessage.classList.add('chat-box__message');
-      userMessage.classList.add('chat-box__message--user');
-      userMessage.classList.add('user-input-style'); 
-      userMessage.innerHTML = `<p>Me: ${userInput}</p>`;
-      chatBox.appendChild(userMessage);
-
-      fetch('getResponse?userMessage=' + encodeURIComponent(userInput))
-        .then(response => response.text())
-        .then(data => {
-          const botMessage = document.createElement('div');
-          botMessage.classList.add('chat-box__message');
-          botMessage.classList.add('chat-box__message--bot');
-          botMessage.classList.add('bot-input-style');
-          botMessage.innerHTML = `<p>Bot: ${data}</p>`;
-          chatBox.appendChild(botMessage);
-        });
-
-      inputElement.value = '';
-      return userInput;
-    }
-  
-    document.getElementById('chat-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      getUserInput();
-    });
+<script>
+    // Your JavaScript code here...
 </script>
 {% endblock %}

@@ -8,4 +8,5 @@ urlpatterns = [
     path('about.html', views.about, name='about'),
     path('chatbot.html', views.chatbot, name='chatbot'),
     path('getResponse/', views.getResponse, name='getResponse'),
+    path('add/', views.add_post, name='add_post'),
 ]

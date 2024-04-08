@@ -3,10 +3,16 @@
 {% block content %}
 
 {% load static %}
-
-<body>
-    <h1>About Me</h1>
-    <p>Replace this paragraph with information about yourself.</p>
-</body>
+<link rel="stylesheet" type="text/css" href="{% static 'zooblog/css/styles.css' %}">
+<div class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div class="header-bar">
+        <h1 class="h1 prominent-header">About Me</h1>
+</div>
+<div class="card">
+    <img src="{% static "zooblog/images/zooloo_img_web.jpg" %}" class="card-img-top">
+    <div class="card-body">
+      <p class="card-text">Some old dude who's learning about web development</p>
+    </div>
+  </div>
 
 {% endblock %}
