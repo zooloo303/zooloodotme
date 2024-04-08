@@ -30,7 +30,36 @@
         </div>
     </div>
 </div>
-<script>
-    // Your JavaScript code here...
+<script> 
+    function getUserInput() {
+      const inputElement = document.getElementById('chat-input');
+      const userInput = inputElement.value;
+      const chatBox = document.getElementById('chat-box');
+      const userMessage = document.createElement('div');
+      userMessage.classList.add('chat-box__message');
+      userMessage.classList.add('chat-box__message--user');
+      userMessage.classList.add('user-input-style'); 
+      userMessage.innerHTML = `<p>Me: ${userInput}</p>`;
+      chatBox.appendChild(userMessage);
+
+      fetch('getResponse?userMessage=' + encodeURIComponent(userInput))
+        .then(response => response.text())
+        .then(data => {
+          const botMessage = document.createElement('div');
+          botMessage.classList.add('chat-box__message');
+          botMessage.classList.add('chat-box__message--bot');
+          botMessage.classList.add('bot-input-style');
+          botMessage.innerHTML = `<p>Bot: ${data}</p>`;
+          chatBox.appendChild(botMessage);
+        });
+
+      inputElement.value = '';
+      return userInput;
+    }
+  
+    document.getElementById('chat-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      getUserInput();
+    });
 </script>
 {% endblock %}
