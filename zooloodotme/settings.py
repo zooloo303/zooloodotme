@@ -25,12 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'SECRET_KEY'
-
+environment = os.getenv('ENVIRONMENT')
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-# ALLOWED_HOSTS = []
-DEBUG = False
-ALLOWED_HOSTS = ['zooloodotme.azurewebsites.net']
+if environment == 'development':
+    DEBUG = True
+    ALLOWED_HOSTS = []
+else:
+    DEBUG = False
+    ALLOWED_HOSTS = ['zooloodotme.azurewebsites.net']
 
 # Application definition
 

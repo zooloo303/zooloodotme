@@ -1,7 +1,9 @@
 import os
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from .models import Post
+from .models import ChatMessage
 from .forms import PostForm
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -23,6 +25,7 @@ def about(request):
 def chatbot(request):
     return render(request, 'chatbot.html')
 
+# functions for use within the app
 def getResponse(request):
     userMessage = request.GET.get('userMessage')
     
@@ -32,7 +35,7 @@ def getResponse(request):
         "content": userMessage
         }
     ],
-        model="gpt-3.5-turbo",
+        model="gpt-4-0125-preview",
     )
     botsResponse = (chat_completion.choices[0].message)
 
@@ -47,3 +50,13 @@ def add_post(request):
     else:
         form = PostForm()
     return render(request, 'add_post.html', {'form': form})
+
+@login_required
+def chat_view(request):
+    if request.method == 'POST':
+        message_text = request.POST.get('message')
+        ChatMessage.objects.create(user=request.user, message=message_text)
+        return redirect('chat_url')  # Replace 'chat_url' with the name of your chat URL.
+
+    messages = ChatMessage.objects.all().order_by('-timestamp')
+    return render(request, 'chatbot.html', {'messages': messages})

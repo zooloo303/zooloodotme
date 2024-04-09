@@ -44,6 +44,7 @@ htmlcov/
 
 # Ignore directories created by vscode
 .vscode/
+TODO.txt
 
 # Ignore directories created by pycharm
 .idea/
